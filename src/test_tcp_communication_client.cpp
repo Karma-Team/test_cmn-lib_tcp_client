@@ -8,12 +8,12 @@
 
 
 #include <iostream>
-#include <CLT_TcpClient.hpp>
+#include <COM_TcpClient.hpp>
 
 
 
 using namespace std;
-using namespace CLT;
+using namespace COM;
 
 
 
