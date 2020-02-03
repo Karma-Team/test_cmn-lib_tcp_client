@@ -18,71 +18,148 @@ int main()
 {
 	cout << "Test C++ library for TCP communication : Client" << endl;
 
-	SPathMsgBody 			l_pathMsgBody;
-	SPathCorrectionMsgBody 	l_pathCorrectionMsgBody;
-	SWorkShopOrderMsgBody	l_workShopOrderMsgBody;
-	SStopMsgBody		 	l_stopMsgBody;
-	SWorkShopReportMsgBody	l_workShopReportMsgBody;
-	SBitReportMsgBody		l_bitReportMsgBody;
-	SErrorMsgBody 			l_errorMsgBody;
-	string 					l_clientInputMsg;
-	int 					l_clientSocket;
-	int 					l_clientRequestedMsgId;
+	SPathMsg 			l_pathMsg;
+	SPathCorrectionMsg 	l_pathCorrectionMsg;
+	SWorkShopOrderMsg	l_workShopOrderMsg;
+	SStopMsg		 	l_stopMsg;
+	SWorkShopReportMsg	l_workShopReportMsg;
+	SBitReportMsg		l_bitReportMsg;
+	SErrorMsg 			l_errorMsg;
+	string 				l_clientInputMsg;
+	int 				l_quitRequested			= 0;
+	int 				l_clientSocket;
 
 	CTcpClient l_CTcpClient(54000, "127.0.0.1");
 	l_clientSocket = l_CTcpClient.initTcpClient();
 	if(l_clientSocket != -1)
 	{
-		//	While loop: send and receive message back from server
+		//	While loop: send and receive message from server
 			do
 			{
-				// Enter msg id
-					cout << "> Client requested msg id : ";
+				// Enter cient cmd
+					cout << "> Client cmd : ";
 					getline(cin, l_clientInputMsg);
-					l_clientRequestedMsgId = strtoul(l_clientInputMsg.c_str(), NULL, 16);
 
-				// Request message to server
-					switch(l_clientRequestedMsgId)
+				// Treat client cmd
+					if(strcmp(l_clientInputMsg.c_str(), "help") == 0)
 					{
-						case MSG_ID_PATH:
-							cout << "> Requested message to server : MSG_ID_PATH\n";
-							l_CTcpClient.requestdMsgToServer(l_clientRequestedMsgId, &l_pathMsgBody);
-							break;
-
-						case MSG_ID_PATH_CORRECTION:
-							cout << "> Requested message to server : MSG_ID_PATH_CORRECTION\n";
-							l_CTcpClient.requestdMsgToServer(l_clientRequestedMsgId, &l_pathCorrectionMsgBody);
-							break;
-
-						case MSG_ID_WORKSHOP_ORDER:
-							cout << "> Requested message to server : MSG_ID_WORKSHOP_ORDER\n";
-							l_CTcpClient.requestdMsgToServer(l_clientRequestedMsgId, &l_workShopOrderMsgBody);
-							break;
-
-						case MSG_ID_STOP:
-							cout << "> Requested message to server : MSG_ID_STOP\n";
-							l_CTcpClient.requestdMsgToServer(l_clientRequestedMsgId, &l_stopMsgBody);
-							break;
-
-						case MSG_ID_WORKSHOP_REPORT:
-							cout << "> Requested message to server : MSG_ID_WORKSHOP_REPORT\n";
-							l_CTcpClient.requestdMsgToServer(l_clientRequestedMsgId, &l_workShopReportMsgBody);
-							break;
-
-						case MSG_ID_BIT_REPORT:
-							cout << "> Requested message to server : MSG_ID_BIT_REPORT\n";
-							l_CTcpClient.requestdMsgToServer(l_clientRequestedMsgId, &l_bitReportMsgBody);
-							break;
-
-						case MSG_ID_ERROR:
-							cout << "> Requested message to server : MSG_ID_ERROR\n";
-							l_CTcpClient.requestdMsgToServer(l_clientRequestedMsgId, &l_errorMsgBody);
-							break;
-
-						default:
-							cout << "> Unknown message ID\n";
+						cout << "	help : display help message\n";
+						cout << "	quit : close TCP client\n";
+						cout << "	requestPathMsg : request PATH message to TCP server\n";
+						cout << "	requestPathCorrectionMsg : request PATH_CORRECTION message to TCP server\n";
+						cout << "	requestWorkShopOrderMsg : request WORKSHOP_ORDER message to TCP server\n";
+						cout << "	requestStopMsg : request STOP message to TCP server\n";
+						cout << "	requestWorkShopOrderReportMsg : request WORKSHOP_ORDER_REPORT message to TCP server\n";
+						cout << "	requestBitReportMsg : request BIT_REPORT message to TCP server\n";
+						cout << "	requestErrorMsg : request ERROR message to TCP server\n";
+						cout << "	displayPathMsg : display PATH message\n";
+						cout << "	displayPathCorrectionMsg : display PATH_CORRECTION message\n";
+						cout << "	displayWorkShopOrderMsg : display WORKSHOP_ORDER message\n";
+						cout << "	displayStopMsg : display STOP message\n";
+						cout << "	displayWorkShopOrderReportMsg : display WORKSHOP_ORDER_REPORT message\n";
+						cout << "	displayBitReportMsg : display BIT_REPORT message\n";
+						cout << "	displayErrorMsg : display ERROR message\n";
 					}
-			} while(true);
+
+					else if(strcmp(l_clientInputMsg.c_str(), "quit") == 0)
+					{
+						cout << "> Quit requested\n";
+						l_quitRequested = 1;
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "requestPathMsg") == 0)
+					{
+						cout << "> Requested message to server : MSG_ID_PATH\n";
+						l_CTcpClient.requestedMsgToServer(MSG_ID_PATH, &l_pathMsg);
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "requestPathCorrectionMsg") == 0)
+					{
+						cout << "> Requested message to server : MSG_ID_PATH_CORRECTION\n";
+						l_CTcpClient.requestedMsgToServer(MSG_ID_PATH_CORRECTION, &l_pathCorrectionMsg);
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "requestWorkShopOrderMsg") == 0)
+					{
+						cout << "> Requested message to server : MSG_ID_WORKSHOP_ORDER\n";
+						l_CTcpClient.requestedMsgToServer(MSG_ID_WORKSHOP_ORDER, &l_workShopOrderMsg);
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "requestStopMsg") == 0)
+					{
+						cout << "> Requested message to server : MSG_ID_STOP\n";
+						l_CTcpClient.requestedMsgToServer(MSG_ID_STOP, &l_stopMsg);
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "requestWorkShopReportMsg") == 0)
+					{
+						cout << "> Requested message to server : MSG_ID_WORKSHOP_REPORT\n";
+						l_CTcpClient.requestedMsgToServer(MSG_ID_WORKSHOP_REPORT, &l_workShopReportMsg);
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "requestBitMsg") == 0)
+					{
+						cout << "> Requested message to server : MSG_ID_BIT_REPORT\n";
+						l_CTcpClient.requestedMsgToServer(MSG_ID_BIT_REPORT, &l_bitReportMsg);
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "requestErrorMsg") == 0)
+					{
+						cout << "> Requested message to server : MSG_ID_ERROR\n";
+						l_CTcpClient.requestedMsgToServer(MSG_ID_ERROR, &l_errorMsg);
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "displayPathMsg") == 0)
+					{
+						cout << "> Path message : \n";
+						cout << "	[hd]\n";
+						cout << "		id : " << l_pathMsg.hd.id << "\n";
+						cout << "		size : " << l_pathMsg.hd.size << "\n";
+						cout << "	[body]\n";
+						cout << "		pointsNb : " << l_pathMsg.body.pointsNb << "\n";
+						cout << "		xyPointsArray : [";
+						for(uint32_t i=0 ; i<MAX_PATH_POINTS ; i++)
+						{
+							cout << l_pathMsg.body.xyPointsArray[i] << " ";
+						}
+						cout << "]\n";
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "displayPathCorrectionMsg") == 0)
+					{
+						cout << "> Path correction message : \n";
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "displayWorkShopOrderMsg") == 0)
+					{
+						cout << "> Workshop order message : \n";
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "displayStopMsg") == 0)
+					{
+						cout << "> Stop message : \n";
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "displayWorkShopReportMsg") == 0)
+					{
+						cout << "> Workshop report message : \n";
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "displayBitMsg") == 0)
+					{
+						cout << "> Bit message : \n";
+					}
+
+					else if(strcmp(l_clientInputMsg.c_str(), "displayStopMsg") == 0)
+					{
+						cout << "> Stop message : \n";
+					}
+
+					else
+					{
+						cout << "> Unknown client cmd : enter 'help' to display available cmd\n";
+					}
+			} while(l_quitRequested == 0);
 	}
 	else
 	{
