@@ -49,7 +49,7 @@ int main()
 						cout << "	requestPathCorrectionMsg : request PATH_CORRECTION message to TCP server\n";
 						cout << "	requestWorkShopOrderMsg : request WORKSHOP_ORDER message to TCP server\n";
 						cout << "	requestStopMsg : request STOP message to TCP server\n";
-						cout << "	requestWorkShopOrderReportMsg : request WORKSHOP_ORDER_REPORT message to TCP server\n";
+						cout << "	requestWorkShopReportMsg : request WORKSHOP_REPORT message to TCP server\n";
 						cout << "	requestBitReportMsg : request BIT_REPORT message to TCP server\n";
 						cout << "	requestErrorMsg : request ERROR message to TCP server\n";
 						cout << "	displayPathMsg : display PATH message\n";
