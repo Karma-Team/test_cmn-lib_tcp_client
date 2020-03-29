@@ -5,6 +5,7 @@
 
 
 #include <iostream>
+#include <common.hpp>
 #include <TCP_Client.hpp>
 
 
@@ -118,9 +119,10 @@ int main()
 						cout << "	[body]\n";
 						cout << "		pointsNb : " << l_pathMsg.body.pointsNb << "\n";
 						cout << "		xyPointsArray : [";
-						for(uint32_t i=0 ; i<MAX_PATH_POINTS ; i++)
+						for(uint32_t i = 0 ; i < MAX_PATH_POINTS ; i++)
 						{
-							cout << l_pathMsg.body.xyPointsArray[i] << " ";
+							cout << "(x : " << l_pathMsg.body.points[i].coordX << " | ";
+							cout << "y : " << l_pathMsg.body.points[i].coordY << ") ; ";
 						}
 						cout << "]\n";
 					}
