@@ -27,7 +27,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/test_cmn-lib/src/TCP}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/test_cmn-lib/src}&quot;"/>
 								</option>
-								<option id="gnu.cpp.compiler.option.dialect.std.1853569933" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.dialect.std.1853569933" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.c++2a" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.dialect.flags.894806379" name="Other dialect flags" superClass="gnu.cpp.compiler.option.dialect.flags" useByScannerDiscovery="true" value="-pthread -lpthread -D_REENTRANT" valueType="string"/>
 								<option id="gnu.cpp.compiler.option.pthread.655038402" name="Support for pthread (-pthread)" superClass="gnu.cpp.compiler.option.pthread" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="gnu.cpp.compiler.option.other.other.1932659619" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0 -std=c++11" valueType="string"/>
